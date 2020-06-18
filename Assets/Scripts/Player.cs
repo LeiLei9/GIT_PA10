@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,18 @@ public class Player : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
+        {
             thisAnimation.Play();
+            transform.position = new Vector3(0, transform.position.y+2, 0);
+        }
+            
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "floor")
+        {
+            SceneManager.LoadScene("GameLose");
+        }
     }
 }
